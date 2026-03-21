@@ -10,7 +10,6 @@ api.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     
-    // Prevent infinite loop if the refresh-token endpoint itself fails or login fails
     if (
       error.response?.status === 401 && 
       !originalRequest._retry && 
