@@ -27,7 +27,6 @@ const AddToPlaylistModal = ({ isOpen, onClose, videoId }) => {
   }
 
   const handleToggleVideo = async (playlist) => {
-    // Basic check if video is already there (Assuming playlist.videos contains IDs or objects with _id)
     const isPresent = playlist.videos.some(v => (v._id || v) === videoId)
     try {
       if (isPresent) {
@@ -35,7 +34,7 @@ const AddToPlaylistModal = ({ isOpen, onClose, videoId }) => {
       } else {
         await playlistService.addVideoToPlaylist(videoId, playlist._id)
       }
-      fetchPlaylists() // Refresh state
+      fetchPlaylists() 
     } catch (error) {
       alert("Failed to update playlist")
     }
