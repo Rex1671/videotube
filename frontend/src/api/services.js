@@ -1,6 +1,5 @@
 import apiClient from './apiClient';
 
-// --- USERS ---
 export const userService = {
     register: (data) => apiClient.post('/users/register', data, { headers: { 'Content-Type': 'multipart/form-data' } }),
     login: (data) => apiClient.post('/users/login', data),
@@ -14,7 +13,6 @@ export const userService = {
     getWatchHistory: () => apiClient.get('/users/history'),
 };
 
-// --- VIDEOS ---
 export const videoService = {
     getAllVideos: (params) => apiClient.get('/videos', { params }), // limit, page, query, sortBy, sortType, userId
     publishVideo: (data) => apiClient.post('/videos', data, { headers: { 'Content-Type': 'multipart/form-data' } }),
@@ -24,7 +22,6 @@ export const videoService = {
     togglePublishStatus: (videoId) => apiClient.patch(`/videos/toggle/publish/${videoId}`),
 };
 
-// --- TWEETS ---
 export const tweetService = {
     createTweet: (data) => apiClient.post('/tweets', data),
     getUserTweets: (userId) => apiClient.get(`/tweets/user/${userId}`),
@@ -32,15 +29,13 @@ export const tweetService = {
     deleteTweet: (tweetId) => apiClient.delete(`/tweets/${tweetId}`),
 };
 
-// --- COMMENTS ---
 export const commentService = {
-    getVideoComments: (videoId, params) => apiClient.get(`/comments/${videoId}`, { params }), // page, limit
+    getVideoComments: (videoId, params) => apiClient.get(`/comments/${videoId}`, { params }), 
     addComment: (videoId, data) => apiClient.post(`/comments/${videoId}`, data),
     updateComment: (commentId, data) => apiClient.patch(`/comments/c/${commentId}`, data),
     deleteComment: (commentId) => apiClient.delete(`/comments/c/${commentId}`),
 };
 
-// --- LIKES ---
 export const likeService = {
     toggleVideoLike: (videoId) => apiClient.post(`/likes/toggle/v/${videoId}`),
     toggleCommentLike: (commentId) => apiClient.post(`/likes/toggle/c/${commentId}`),
@@ -48,7 +43,6 @@ export const likeService = {
     getLikedVideos: () => apiClient.get('/likes/videos'),
 };
 
-// --- PLAYLISTS ---
 export const playlistService = {
     createPlaylist: (data) => apiClient.post('/playlists', data),
     getUserPlaylists: (userId) => apiClient.get(`/playlists/user/${userId}`),
@@ -59,14 +53,12 @@ export const playlistService = {
     updatePlaylist: (playlistId, data) => apiClient.patch(`/playlists/${playlistId}`, data),
 };
 
-// --- SUBSCRIPTIONS ---
 export const subscriptionService = {
-    getSubscribedChannels: (subscriberId) => apiClient.get(`/subscriptions/c/${subscriberId}`), // Wait checking routes: it is /c/:channelId for checking who channel subscribed to? No /c/:channelId gets subscribers of channel.
+    getSubscribedChannels: (subscriberId) => apiClient.get(`/subscriptions/c/${subscriberId}`), 
     getUserChannelSubscribers: (channelId) => apiClient.get(`/subscriptions/u/${channelId}`),
     toggleSubscription: (channelId) => apiClient.post(`/subscriptions/c/${channelId}`),
 };
 
-// --- DASHBOARD ---
 export const dashboardService = {
     getChannelStats: () => apiClient.get('/dashboard/stats'),
     getChannelVideos: () => apiClient.get('/dashboard/videos'),
