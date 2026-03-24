@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "/api",
+  baseURL: import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : "/api",
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",
@@ -15,7 +15,8 @@ apiClient.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
       try {
-        await axios.post("/api/users/refresh-token", {}, { withCredentials: true });
+        const refreshURL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/users/refresh-token` : "/api/users/refresh-token";
+        await axios.post(refreshURL, {}, { withCredentials: true });
         return apiClient(originalRequest);
       } catch (err) {
         window.location.href = "/login";

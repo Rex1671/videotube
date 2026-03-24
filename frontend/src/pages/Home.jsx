@@ -3,6 +3,7 @@ import api from '../api/axios'
 import toast from 'react-hot-toast'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import { MOCK_VIDEOS } from '../utils/mockData'
 
 const Home = () => {
   const [videos, setVideos] = useState([])
@@ -14,7 +15,9 @@ const Home = () => {
         const res = await api.get('/videos')
         setVideos(res.data.data || [])
       } catch (error) {
-        toast.error("Failed to load videos")
+        console.warn("Backend offline, using mock data.", error)
+        setVideos(MOCK_VIDEOS)
+        toast.error("Offline: Showing sample videos")
       } finally {
         setLoading(false)
       }
