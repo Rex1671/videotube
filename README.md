@@ -98,4 +98,4 @@ npm run dev
 - `npm run preview`: Locally previews the production build.
 
 ---
-Built with ❤️ by [Rex1671](https://github.com/Rex1671)
+Built with ❤️ by [Rex1671](https://github.com/RakeshRautDev)
